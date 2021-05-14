@@ -51,7 +51,14 @@ def display_history():
 @app.route("/")
    
 def home():
-    return render_template("homepage.html")
+    tickers = yf.Tickers('msft aapl goog nok tlry pltr')
+	# tickers = yf.Tickers('aapl')
+	data = []
+	for key in tickers.tickers:
+		data.append(tickers.tickers[key].info)
+
+	return render_template("homepage.html", data=data)
+   
    
  #Running the Flask app.
  
